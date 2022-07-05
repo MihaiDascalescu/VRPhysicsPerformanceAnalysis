@@ -26,7 +26,8 @@ public class LocomotionController : MonoBehaviour
         Vector3 norm = new Vector3();
         int index = 0;
         bool validTarget = false;
-        if (leftTeleportRay)
+        
+        /*if (leftTeleportRay)
         {
             bool isLeftInteractorHovering = leftRay.TryGetHitInfo(out pos,out norm,out index, out validTarget);
             leftTeleportRay.gameObject.SetActive(EnableLeftTeleport && CheckIfTeleportActivated(leftTeleportRay) && !isLeftInteractorHovering);
@@ -36,7 +37,7 @@ public class LocomotionController : MonoBehaviour
         {
             bool isRightInteractorHovering = rightRay.TryGetHitInfo(out pos, out norm, out index, out validTarget);
             rightTeleportRay.gameObject.SetActive(EnableRightTeleport && CheckIfTeleportActivated(rightTeleportRay) && !isRightInteractorHovering);
-        }
+        }*/
 
     }
 

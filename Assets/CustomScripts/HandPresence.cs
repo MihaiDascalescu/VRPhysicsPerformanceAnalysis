@@ -9,7 +9,7 @@ public class HandPresence : MonoBehaviour
  	public bool showController = false;
 	public InputDeviceCharacteristics controllerCharacteristics;
 	public List<GameObject> controllerPrefabs;
-	public GameObject handModelPrefab;
+	//public GameObject handModelPrefab;
 	
     public InputDevice targetDevice;
 	public GameObject spawnedController;
@@ -47,8 +47,7 @@ public class HandPresence : MonoBehaviour
 				spawnedController = Instantiate(controllerPrefabs[0], transform);
 			}
 			
-			spawnedHandModel = Instantiate(handModelPrefab, transform);
-			handAnimator = spawnedHandModel.GetComponent<Animator>();
+			
 		}
 	}
 	void UpdateHandAnimation()
@@ -77,20 +76,6 @@ public class HandPresence : MonoBehaviour
 		if (!targetDevice.isValid)
 		{
 			TryInitialize();
-		}
-		else
-		{
-			if (showController)
-        	{
-        	spawnedHandModel.SetActive(false);
-        	spawnedController.SetActive(true);
-      	  	}
-      	 	else
-      		{
-        	spawnedHandModel.SetActive(true);
-        	spawnedController.SetActive(false);
-			UpdateHandAnimation();
-			}
 		}
     }
     

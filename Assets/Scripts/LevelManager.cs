@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class LevelManager : MonoBehaviour
 {
@@ -7,98 +9,337 @@ public class LevelManager : MonoBehaviour
     public enum LevelTypes
     {
         Blank,
-        PhysicsOneObject = 1,
-        PhysicsTenObjects = 2,
-        PhysicsFiftyObjects = 3,
-        PhysicsOneHundredObjects = 4 ,
-        PhysicsPostProcessingOneObject = 5,
-        PhysicsPostProcessingTenObjects = 6,
-        PhysicsPostProcessingFiftyObjects = 7,
-        PhysicsPostProcessingOneHundredObjects = 8
+        PhysicsSphereColliderFiveHundredObjects = 1,
+        PhysicsSphereColliderOneThousandObjects = 2,
+        PhysicsSphereColliderTwoThousandObjects = 3,
+        PhysicsSphereColliderThreeThousandObjects = 4 ,
+        PhysicsSphereColliderContinousDetectionFiveHundredObjects = 5,
+        PhysicsSphereColliderContinousDetectionOneThousandObjects = 6,
+        PhysicsSphereColliderContinousDetectionTwoThousandObjects = 7,
+        PhysicsSphereColliderContinousDetectionThreeThousandObjects = 8,
+        PhysicsMeshColliderDiscreteFiveHundredObjects = 9,
+        PhysicsMeshColliderOneThousandObjects = 10,
+        PhysicsMeshColliderTwoThousandObjects = 11,
+        PhysicsMeshColliderThreeThousandObjects = 12 ,
+        PhysicsMeshColliderContinousDetectionFiveHundredObjects = 13,
+        PhysicsMeshColliderContinousDetectionOneThousandObjects = 14,
+        PhysicsMeshColliderContinousDetectionTwoThousandObjects = 15,
+        PhysicsMeshColliderContinousDetectionThreeThousandObjects = 16,
+        PhysicsSphereColliderFourThousandObjects = 17,
+        PhysicsSphereColliderFiveThousandObjects = 18,
+        PhysicsSphereColliderSevenThousandObjects = 19,
+        PhysicsSphereColliderTenThousandObjects = 20,
+        PhysicsSphereColliderContinousDetectionFourThousandObjects = 21,
+        PhysicsSphereColliderContinousDetectionFiveThousandObjects = 22,
+        PhysicsSphereColliderContinousDetectionSevenThousandObjects = 23,
+        PhysicsSphereColliderContinousDetectionTenThousandObjects = 24,
+        PhysicsMeshColliderFourThousandObjects = 25,
+        PhysicsMeshColliderFiveThousandObjects = 26,
+        PhysicsMeshColliderSevenThousandObjects = 27,
+        PhysicsMeshColliderTenThousandObjects = 28,
+        PhysicsMeshColliderContinousDetectionFourThousandObjects = 29,
+        PhysicsMeshColliderContinousDetectionFiveThousandObjects = 30,
+        PhysicsMeshColliderContinousDetectionSevenThousandObjects = 31,
+        PhysicsMeshColliderContinousDetectionTenThousandObjects = 32,
     }
     // Start is called before the first frame update
     private LevelTypes levelType;
 
     private GameObject[,] positionMatrix;
+
+    private GameObject[] gameObjectsToBeInstantiated;
+
     
-    [SerializeField] private GameObject objectToInstantiate;
-    [SerializeField] private GameObject postProcessing;
-    void Start()
+    [SerializeField] private GameObject ballSphereCollider;
+    [SerializeField] private GameObject ballMeshCollider;
+ 
+
+    private Vector3 randomPosition;
+    private Rigidbody ballSphereColliderRb;
+    private Rigidbody ballMeshColliderRb;
+    private void Start()
     {
-        OnLevelChanged(6);
+        ballMeshColliderRb = ballMeshCollider.GetComponent<Rigidbody>();
+        ballSphereColliderRb = ballSphereCollider.GetComponent<Rigidbody>();
     }
 
-   
     public void OnLevelChanged(int levelIndex)
     {
         switch (levelIndex)
         {
-            case (int)LevelTypes.PhysicsOneObject:
-                DestroyInstantiatedObjects(1,1);
-                InstantiateObjectsAtPosition(1,1);
-                postProcessing.SetActive(false);
+            case (int)LevelTypes.PhysicsSphereColliderFiveHundredObjects:
+                DestroyInstantiatedAtRandomPostion();
+                gameObjectsToBeInstantiated = new GameObject[500];
+                ballSphereColliderRb.collisionDetectionMode = CollisionDetectionMode.Discrete;
+                InstantiateAtRandomPostion(0,5,ballSphereCollider);
+              
                 break;
-            case (int)LevelTypes.PhysicsTenObjects:
-                DestroyInstantiatedObjects(10,10);
-                InstantiateObjectsAtPosition(10,10);
-                postProcessing.SetActive(false);
+            case (int)LevelTypes.PhysicsSphereColliderOneThousandObjects:
+                DestroyInstantiatedAtRandomPostion();
+                gameObjectsToBeInstantiated = new GameObject[1000];
+                ballSphereColliderRb.collisionDetectionMode = CollisionDetectionMode.Discrete;
+                InstantiateAtRandomPostion(0,5,ballSphereCollider);
+               
                 break;
-            case (int)LevelTypes.PhysicsFiftyObjects:
-                DestroyInstantiatedObjects(50,50);
-                InstantiateObjectsAtPosition(50,50);
-                postProcessing.SetActive(false);
+            case (int)LevelTypes.PhysicsSphereColliderTwoThousandObjects:
+                DestroyInstantiatedAtRandomPostion();
+                gameObjectsToBeInstantiated = new GameObject[2000];
+                ballSphereColliderRb.collisionDetectionMode = CollisionDetectionMode.Discrete;
+                InstantiateAtRandomPostion(0,5,ballSphereCollider);
+            
                 break;
-            case (int)LevelTypes.PhysicsOneHundredObjects:
-                DestroyInstantiatedObjects(100,100);
-                InstantiateObjectsAtPosition(100,100);
-                postProcessing.SetActive(false);
+            case (int)LevelTypes.PhysicsSphereColliderThreeThousandObjects:
+                DestroyInstantiatedAtRandomPostion();
+                gameObjectsToBeInstantiated = new GameObject[3000];
+                ballSphereColliderRb.collisionDetectionMode = CollisionDetectionMode.Discrete;
+                InstantiateAtRandomPostion(0,5,ballSphereCollider);
+                
                 break;
-            case (int)LevelTypes.PhysicsPostProcessingOneObject:
-                DestroyInstantiatedObjects(1,1);
-                InstantiateObjectsAtPosition(1,1);
-                postProcessing.SetActive(true);
+            case (int)LevelTypes.PhysicsSphereColliderContinousDetectionFiveHundredObjects:
+                DestroyInstantiatedAtRandomPostion();
+                gameObjectsToBeInstantiated = new GameObject[500];
+                ballSphereColliderRb.collisionDetectionMode = CollisionDetectionMode.Continuous;
+                InstantiateAtRandomPostion(0,5,ballSphereCollider);
+               
                 break;
-            case (int)LevelTypes.PhysicsPostProcessingTenObjects:
-                DestroyInstantiatedObjects(10,10);
-                InstantiateObjectsAtPosition(10,10);
-                postProcessing.SetActive(true);
+            case (int)LevelTypes.PhysicsSphereColliderContinousDetectionOneThousandObjects:
+               
+                DestroyInstantiatedAtRandomPostion();
+                gameObjectsToBeInstantiated = new GameObject[1000];
+                ballSphereColliderRb.collisionDetectionMode = CollisionDetectionMode.Continuous;
+                InstantiateAtRandomPostion(0,5,ballSphereCollider);
+                
                 break;
-            case (int)LevelTypes.PhysicsPostProcessingFiftyObjects:
-                DestroyInstantiatedObjects(50,50);
-                InstantiateObjectsAtPosition(50,50);
-                postProcessing.SetActive(true);
+            case (int)LevelTypes.PhysicsSphereColliderContinousDetectionTwoThousandObjects:
+                
+                DestroyInstantiatedAtRandomPostion();
+                gameObjectsToBeInstantiated = new GameObject[2000];
+                ballSphereColliderRb.collisionDetectionMode = CollisionDetectionMode.Continuous;
+                InstantiateAtRandomPostion(0,5,ballSphereCollider);
+                
                 break;
-            case (int)LevelTypes.PhysicsPostProcessingOneHundredObjects:
-                DestroyInstantiatedObjects(100,100);
-                InstantiateObjectsAtPosition(100,100);
-                postProcessing.SetActive(true);
+            case (int)LevelTypes.PhysicsSphereColliderContinousDetectionThreeThousandObjects:
+                
+                DestroyInstantiatedAtRandomPostion();
+                gameObjectsToBeInstantiated = new GameObject[3000];
+                ballSphereColliderRb.collisionDetectionMode = CollisionDetectionMode.Continuous;
+                InstantiateAtRandomPostion(0,5,ballSphereCollider);
+                
+                break;
+             case (int)LevelTypes.PhysicsMeshColliderDiscreteFiveHundredObjects:
+                
+                DestroyInstantiatedAtRandomPostion();
+                gameObjectsToBeInstantiated = new GameObject[500];
+                ballMeshColliderRb.collisionDetectionMode = CollisionDetectionMode.Discrete;
+                InstantiateAtRandomPostion(0,5,ballMeshCollider);
+                
+                break;
+            case (int)LevelTypes.PhysicsMeshColliderOneThousandObjects:
+                
+                DestroyInstantiatedAtRandomPostion();
+                gameObjectsToBeInstantiated = new GameObject[1000];
+                ballMeshColliderRb.collisionDetectionMode = CollisionDetectionMode.Discrete;
+                InstantiateAtRandomPostion(0,5,ballMeshCollider);
+               
+                break;
+            case (int)LevelTypes.PhysicsMeshColliderTwoThousandObjects:
+               
+                DestroyInstantiatedAtRandomPostion();
+                gameObjectsToBeInstantiated = new GameObject[2000];
+                ballMeshColliderRb.collisionDetectionMode = CollisionDetectionMode.Discrete;
+                InstantiateAtRandomPostion(0,5,ballMeshCollider);
+                
+                break;
+            case (int)LevelTypes.PhysicsMeshColliderThreeThousandObjects:
+                
+                DestroyInstantiatedAtRandomPostion();
+                gameObjectsToBeInstantiated = new GameObject[3000];
+                ballMeshColliderRb.collisionDetectionMode = CollisionDetectionMode.Discrete;
+                InstantiateAtRandomPostion(0,5,ballMeshCollider);
+                
+                break;
+            case (int)LevelTypes.PhysicsMeshColliderContinousDetectionFiveHundredObjects:
+                DestroyInstantiatedAtRandomPostion();
+                gameObjectsToBeInstantiated = new GameObject[500];
+                ballMeshColliderRb.collisionDetectionMode = CollisionDetectionMode.Continuous;
+                InstantiateAtRandomPostion(0,5,ballMeshCollider);
+                
+                break;
+            case (int)LevelTypes.PhysicsMeshColliderContinousDetectionOneThousandObjects:
+               
+                DestroyInstantiatedAtRandomPostion();
+                gameObjectsToBeInstantiated = new GameObject[1000];
+                ballMeshColliderRb.collisionDetectionMode = CollisionDetectionMode.Continuous;
+                InstantiateAtRandomPostion(0,5,ballMeshCollider);
+               
+                break;
+            case (int)LevelTypes.PhysicsMeshColliderContinousDetectionTwoThousandObjects:
+                
+                DestroyInstantiatedAtRandomPostion();
+                gameObjectsToBeInstantiated = new GameObject[2000];
+                ballMeshColliderRb.collisionDetectionMode = CollisionDetectionMode.Continuous;
+                InstantiateAtRandomPostion(0,5,ballMeshCollider);
+                
+                break;
+            case (int)LevelTypes.PhysicsMeshColliderContinousDetectionThreeThousandObjects:
+                
+                DestroyInstantiatedAtRandomPostion();
+                gameObjectsToBeInstantiated = new GameObject[3000];
+                ballMeshColliderRb.collisionDetectionMode = CollisionDetectionMode.Continuous;
+                InstantiateAtRandomPostion(0,5,ballMeshCollider);
+                
+                break;
+            case (int)LevelTypes.PhysicsSphereColliderFourThousandObjects:
+                
+                DestroyInstantiatedAtRandomPostion();
+                gameObjectsToBeInstantiated = new GameObject[4000];
+                ballSphereColliderRb.collisionDetectionMode = CollisionDetectionMode.Discrete;
+                InstantiateAtRandomPostion(0,5,ballSphereCollider);
+                
+                break;
+            case (int)LevelTypes.PhysicsSphereColliderFiveThousandObjects:
+                
+                DestroyInstantiatedAtRandomPostion();
+                gameObjectsToBeInstantiated = new GameObject[5000];
+                ballSphereColliderRb.collisionDetectionMode = CollisionDetectionMode.Discrete;
+                InstantiateAtRandomPostion(0,5,ballSphereCollider);
+                
+                break;
+            case (int)LevelTypes.PhysicsSphereColliderSevenThousandObjects:
+               
+                DestroyInstantiatedAtRandomPostion();
+                gameObjectsToBeInstantiated = new GameObject[7500];
+                ballSphereColliderRb.collisionDetectionMode = CollisionDetectionMode.Discrete;
+                InstantiateAtRandomPostion(0,5,ballSphereCollider);
+                
+                break;
+            case (int)LevelTypes.PhysicsSphereColliderTenThousandObjects:
+                
+                DestroyInstantiatedAtRandomPostion();
+                gameObjectsToBeInstantiated = new GameObject[10000];
+                ballSphereColliderRb.collisionDetectionMode = CollisionDetectionMode.Discrete;
+                InstantiateAtRandomPostion(0,5,ballSphereCollider);
+                
+                break;
+            case (int)LevelTypes.PhysicsSphereColliderContinousDetectionFourThousandObjects:
+                
+                DestroyInstantiatedAtRandomPostion();
+                gameObjectsToBeInstantiated = new GameObject[4000];
+                ballSphereColliderRb.collisionDetectionMode = CollisionDetectionMode.Continuous;
+                InstantiateAtRandomPostion(0,5,ballSphereCollider);
+                
+                break;
+            case (int)LevelTypes.PhysicsSphereColliderContinousDetectionFiveThousandObjects:
+               
+                DestroyInstantiatedAtRandomPostion();
+                gameObjectsToBeInstantiated = new GameObject[5000];
+                ballSphereColliderRb.collisionDetectionMode = CollisionDetectionMode.Continuous;
+                InstantiateAtRandomPostion(0,5,ballSphereCollider);
+                
+                break;
+            case (int)LevelTypes.PhysicsSphereColliderContinousDetectionSevenThousandObjects:
+                
+                DestroyInstantiatedAtRandomPostion();
+                gameObjectsToBeInstantiated = new GameObject[7500];
+                ballSphereColliderRb.collisionDetectionMode = CollisionDetectionMode.Continuous;
+                InstantiateAtRandomPostion(0,5,ballSphereCollider);
+                
+                break;
+            case (int)LevelTypes.PhysicsSphereColliderContinousDetectionTenThousandObjects:
+                
+                DestroyInstantiatedAtRandomPostion();
+                gameObjectsToBeInstantiated = new GameObject[10000];
+                ballSphereColliderRb.collisionDetectionMode = CollisionDetectionMode.Continuous;
+                InstantiateAtRandomPostion(0,5,ballSphereCollider);
+                
+                break;
+             case (int)LevelTypes.PhysicsMeshColliderFourThousandObjects:
+                
+                DestroyInstantiatedAtRandomPostion();
+                gameObjectsToBeInstantiated = new GameObject[4000];
+                ballMeshColliderRb.collisionDetectionMode = CollisionDetectionMode.Discrete;
+                InstantiateAtRandomPostion(0,5,ballMeshCollider);
+                
+                break;
+            case (int)LevelTypes.PhysicsMeshColliderFiveThousandObjects:
+                
+                DestroyInstantiatedAtRandomPostion();
+                gameObjectsToBeInstantiated = new GameObject[5000];
+                ballMeshColliderRb.collisionDetectionMode = CollisionDetectionMode.Discrete;
+                InstantiateAtRandomPostion(0,5,ballMeshCollider);
+                
+                break;
+            case (int)LevelTypes.PhysicsMeshColliderSevenThousandObjects:
+               
+                DestroyInstantiatedAtRandomPostion();
+                gameObjectsToBeInstantiated = new GameObject[7500];
+                ballMeshColliderRb.collisionDetectionMode = CollisionDetectionMode.Discrete;
+                InstantiateAtRandomPostion(0,5,ballMeshCollider);
+               
+                break;
+            case (int)LevelTypes.PhysicsMeshColliderTenThousandObjects:
+                
+                DestroyInstantiatedAtRandomPostion();
+                gameObjectsToBeInstantiated = new GameObject[10000];
+                ballMeshColliderRb.collisionDetectionMode = CollisionDetectionMode.Discrete;
+                InstantiateAtRandomPostion(0,5,ballMeshCollider);
+                
+                break;
+            case (int)LevelTypes.PhysicsMeshColliderContinousDetectionFourThousandObjects:
+                DestroyInstantiatedAtRandomPostion();
+                gameObjectsToBeInstantiated = new GameObject[4000];
+                ballMeshColliderRb.collisionDetectionMode = CollisionDetectionMode.Continuous;
+                InstantiateAtRandomPostion(0,5,ballMeshCollider);
+                
+                break;
+            case (int)LevelTypes.PhysicsMeshColliderContinousDetectionFiveThousandObjects:
+               
+                DestroyInstantiatedAtRandomPostion();
+                gameObjectsToBeInstantiated = new GameObject[5000];
+                ballMeshColliderRb.collisionDetectionMode = CollisionDetectionMode.Continuous;
+                InstantiateAtRandomPostion(0,5,ballMeshCollider);
+                
+                break;
+            case (int)LevelTypes.PhysicsMeshColliderContinousDetectionSevenThousandObjects:
+                
+                DestroyInstantiatedAtRandomPostion();
+                gameObjectsToBeInstantiated = new GameObject[7500];
+                ballMeshColliderRb.collisionDetectionMode = CollisionDetectionMode.Continuous;
+                InstantiateAtRandomPostion(0,5,ballMeshCollider);
+                
+                break;
+            case (int)LevelTypes.PhysicsMeshColliderContinousDetectionTenThousandObjects:
+                
+                DestroyInstantiatedAtRandomPostion();
+                gameObjectsToBeInstantiated = new GameObject[10000];
+                ballMeshColliderRb.collisionDetectionMode = CollisionDetectionMode.Continuous;
+                InstantiateAtRandomPostion(0,5,ballMeshCollider);
+                
                 break;
         }
     }
 
-    private void InstantiateObjectsAtPosition(int columnLength, int rowLength)
+ 
+
+    private void InstantiateAtRandomPostion(float startLimit, float endLimit, GameObject objectToInstantiate)
     {
-        positionMatrix = new GameObject[columnLength, rowLength];
-        for (int i = 0; i < columnLength; i++)
+        for (int i = 0; i < gameObjectsToBeInstantiated.Length; i++)
         {
-            for (int j = 0; j < rowLength; j++)
+            randomPosition = new Vector3(Random.Range(startLimit, endLimit), 5,
+                Random.Range(startLimit, endLimit));
+            gameObjectsToBeInstantiated[i] = Instantiate(objectToInstantiate, randomPosition, Quaternion.identity);
+        }
+    }
+    private void DestroyInstantiatedAtRandomPostion()
+    {
+        if (gameObjectsToBeInstantiated != null)
+        {
+            for (int i = 0; i < gameObjectsToBeInstantiated.Length; i++)
             {
-                positionMatrix[i, j] = Instantiate(objectToInstantiate, new Vector3(i, 10, j), Quaternion.identity);
+                Destroy(gameObjectsToBeInstantiated[i]);
             }
         }
     }
 
-    private void DestroyInstantiatedObjects(int columnLength, int rowLength)
-    {
-        if (positionMatrix != null)
-        {
-            for (int i = 0; i < columnLength; i++)
-            {
-                for (int j = 0; j < rowLength; j++)
-                {
-                    Destroy(positionMatrix[i,j]);
-                }
-            }
-        }
-    }
+    
 }

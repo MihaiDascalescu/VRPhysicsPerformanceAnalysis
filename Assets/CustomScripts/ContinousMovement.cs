@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Unity.XR.CoreUtils;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.XR;
@@ -16,7 +17,7 @@ public class ContinousMovement : MonoBehaviour
     [SerializeField]private float additionalHeight = 0.2f;
     
     private Vector2 inputAxis;
-    private XRRig rig;
+    private XROrigin rig;
     
     private InputDevice device; 
     
@@ -25,7 +26,7 @@ public class ContinousMovement : MonoBehaviour
     void Start()
     {
         characterController = GetComponent<CharacterController>();
-        rig = GetComponent<XRRig>();
+        rig = GetComponent<XROrigin>();
         device = InputDevices.GetDeviceAtXRNode(inputSource);
     }
 
@@ -38,7 +39,8 @@ public class ContinousMovement : MonoBehaviour
     private void FixedUpdate()
     {
         CapsuleFollowHeadset();
-        Quaternion headYaw = Quaternion.Euler(0, rig.cameraGameObject.transform.eulerAngles.y, 0);
+        //Quaternion headYaw = Quaternion.Euler(0, rig.cameraGameObject.transform.eulerAngles.y, 0);
+        Quaternion headYaw = Quaternion.Euler(0,rig.CameraFloorOffsetObject.transform.eulerAngles.y,0);
         Vector3 direction = headYaw * new Vector3(inputAxis.x, 0, inputAxis.y);
 
         characterController.Move(direction * (speed * Time.fixedDeltaTime));
@@ -46,8 +48,8 @@ public class ContinousMovement : MonoBehaviour
 
     private void CapsuleFollowHeadset()
     {
-        characterController.height = rig.cameraInRigSpaceHeight + additionalHeight;
-        Vector3 capsuleCenter = transform.InverseTransformPoint(rig.cameraGameObject.transform.position);
+        characterController.height = rig.CameraInOriginSpaceHeight + additionalHeight;//rig.cameraInRigSpaceHeight + additionalHeight;
+        Vector3 capsuleCenter = transform.InverseTransformPoint(rig.CameraFloorOffsetObject.transform.position);
         characterController.center = new Vector3(capsuleCenter.x,characterController.height/2 + characterController.skinWidth,capsuleCenter.z);
     }
  
