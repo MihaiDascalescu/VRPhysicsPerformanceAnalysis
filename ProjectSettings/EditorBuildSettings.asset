@@ -6,7 +6,13 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/MainScene.unity
+    path: Assets/Scenes/LODSphereCollider.unity
+    guid: 76ce19480e1677b46aaf1779e1d2b372
+  - enabled: 1
+    path: Assets/Scenes/PolyCountSphereMesh.unity
+    guid: f4ca0fc1dec43604e9305bf4715576ae
+  - enabled: 1
+    path: Assets/Scenes/MeshSphereColliderDiscreteContinous.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: 61b64dffe872e184e848bbb52010612d, type: 2}

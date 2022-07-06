@@ -3,9 +3,9 @@ using System.Collections;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class LevelManager : MonoBehaviour
+public class MeshColliderSphereColliderLevel : MonoBehaviour
 {
-    
+    #region TestCases
     public enum LevelTypes
     {
         Blank,
@@ -42,25 +42,25 @@ public class LevelManager : MonoBehaviour
         PhysicsMeshColliderContinousDetectionSevenThousandObjects = 31,
         PhysicsMeshColliderContinousDetectionTenThousandObjects = 32,
     }
-    // Start is called before the first frame update
+    
+    #endregion
+    
     private LevelTypes levelType;
-
-    private GameObject[,] positionMatrix;
-
+    
     private GameObject[] gameObjectsToBeInstantiated;
 
-    
     [SerializeField] private GameObject ballSphereCollider;
     [SerializeField] private GameObject ballMeshCollider;
- 
-
+    
     private Vector3 randomPosition;
     private Rigidbody ballSphereColliderRb;
     private Rigidbody ballMeshColliderRb;
     private void Start()
     {
+        Random.InitState(0);
         ballMeshColliderRb = ballMeshCollider.GetComponent<Rigidbody>();
         ballSphereColliderRb = ballSphereCollider.GetComponent<Rigidbody>();
+        OnLevelChanged(4);
     }
 
     public void OnLevelChanged(int levelIndex)
@@ -328,6 +328,7 @@ public class LevelManager : MonoBehaviour
             randomPosition = new Vector3(Random.Range(startLimit, endLimit), 5,
                 Random.Range(startLimit, endLimit));
             gameObjectsToBeInstantiated[i] = Instantiate(objectToInstantiate, randomPosition, Quaternion.identity);
+            
         }
     }
     private void DestroyInstantiatedAtRandomPostion()
