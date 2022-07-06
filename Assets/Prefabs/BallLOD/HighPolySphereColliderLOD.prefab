@@ -143,15 +143,15 @@ LODGroup:
   m_AnimateCrossFading: 0
   m_LastLODIsBillboard: 0
   m_LODs:
-  - screenRelativeHeight: 0.5994573
+  - screenRelativeHeight: 0.02606096
     fadeTransitionWidth: 0
     renderers:
     - renderer: {fileID: 8393337248092828655}
-  - screenRelativeHeight: 0.30126193
+  - screenRelativeHeight: 0.0055299457
     fadeTransitionWidth: 0
     renderers:
     - renderer: {fileID: 392869024681242608}
-  - screenRelativeHeight: 0.1
+  - screenRelativeHeight: 0
     fadeTransitionWidth: 0
     renderers:
     - renderer: {fileID: 5371836775684180712}
@@ -223,7 +223,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: LowPolySphereCollider
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1497301904834000354, guid: 0197eaa5d8b73cd408c0e262bdddd031, type: 3}
+    - {fileID: 5113008710100622619, guid: 0197eaa5d8b73cd408c0e262bdddd031, type: 3}
+    - {fileID: 6093343981642517767, guid: 0197eaa5d8b73cd408c0e262bdddd031, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 0197eaa5d8b73cd408c0e262bdddd031, type: 3}
 --- !u!4 &6541396866089021831 stripped
 Transform:
@@ -302,7 +305,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 983954152274711582, guid: 2619a9f325177aa4c878fdee136813c0, type: 3}
+    - {fileID: 7125372853238980901, guid: 2619a9f325177aa4c878fdee136813c0, type: 3}
+    - {fileID: 88520608724247323, guid: 2619a9f325177aa4c878fdee136813c0, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 2619a9f325177aa4c878fdee136813c0, type: 3}
 --- !u!4 &1529232208110212255 stripped
 Transform:
