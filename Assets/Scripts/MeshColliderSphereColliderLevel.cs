@@ -6,7 +6,7 @@ using Random = UnityEngine.Random;
 public class MeshColliderSphereColliderLevel : MonoBehaviour
 {
     #region TestCases
-    public enum LevelTypes
+    private enum LevelTypes
     {
         Blank,
         PhysicsSphereColliderFiveHundredObjects = 1,
