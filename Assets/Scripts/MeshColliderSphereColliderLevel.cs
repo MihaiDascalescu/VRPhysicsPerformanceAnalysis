@@ -60,7 +60,7 @@ public class MeshColliderSphereColliderLevel : MonoBehaviour
         Random.InitState(0);
         ballMeshColliderRb = ballMeshCollider.GetComponent<Rigidbody>();
         ballSphereColliderRb = ballSphereCollider.GetComponent<Rigidbody>();
-        OnLevelChanged(4);
+        
     }
 
     public void OnLevelChanged(int levelIndex)
