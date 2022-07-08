@@ -53,6 +53,7 @@ public class LODSphereColliderLevel : MonoBehaviour
     private void Start()
     {
         Random.InitState(0);
+        OnLevelChanged(2);
     }
 
     public void OnLevelChanged(int levelIndex)
